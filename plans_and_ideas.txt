@@ -1,0 +1,10 @@
+- Add to DB:
+  * payment method (cash/card/transfer/crypto/other)
+  * shop
+
+- be able to choose: date or auto timestamp
+  * requires selectable date in form
+
+- be able to save credit cards
+
+- 

@@ -63,7 +63,11 @@ let counter = 0;
 function modifyRow() {
   counter += 1;
   if(counter === 10) {
-    window.alert("Ne nyomkodd már azt a szart!!");
+    window.alert("Jó játék, hogy nyomkodod??");
     counter = 0;
   }
 };
+
+function submit_purchase() {
+  console.log("Purchase submitted!");
+}

@@ -30,10 +30,10 @@ const database = mysql.createConnection({
 
 database.connect((err) => {
   if (err) {
-    console.log('DB connection is fucked up!');
+    console.log('DB connection is messed up!');
     console.log(err);
   } else {
-    console.log('Kiss my ass, DB is fucking ready!');
+    console.log('Kiss me, DB is ready!');
   }
 });
 
