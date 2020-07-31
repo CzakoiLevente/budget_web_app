@@ -7,6 +7,9 @@ let body;
 let buttonInsert;
 let buttonList;
 let entries;
+let formItem;
+let formQuantity;
+let formPrice;
 
 window.onload = () => {
 
@@ -14,6 +17,9 @@ window.onload = () => {
   body = document.getElementById('body');
   buttonInsert = document.getElementById('insert');
   buttonList = document.getElementById('list');
+  formItem = document.getElementById('formItem');
+  formPrice = document.getElementById('formPrice');
+  formQuantity = document.getElementById('formQuantity');
 
   //let response = http.responseText;
   //console.log('data = ' + data);
@@ -70,4 +76,10 @@ function modifyRow() {
 
 function submit_purchase() {
   console.log("Purchase submitted!");
-}
+  let formData = {
+    item : formItem.value,
+    quantity : formQuantity.value,
+    price : formPrice.value 
+  };
+  console.log(formData.item + ' ' + formData.quantity + ' ' + formData.price);
+};

@@ -19,19 +19,17 @@
   <p id="form">
     <div id="form_row">
       <label for="item_name">Purchased item:</label>
-      <input type="text" name="name" id="name" required>    
+      <input type="text" name="name" id="formItem" required>    
     </div>
     <div id="form_row">
       <label for="item_quantity">Quantity:</label>
-      <input type="number" name="" id="quantity">
+      <input type="number" name="" id="formQuantity">
     </div>
     <div id="form_row">
       <label for="item_price">Price:</label>
-      <input type="number" name="" id="price">
+      <input type="number" name="" id="formPrice">
     </div>
-    
-    <input type="submit" value="Submit purchase!" onclick="submit_purchase()">
-    
+    <button onclick="submit_purchase()">"Submit purchase!"</button>   
   </p>
   <pre id="entries"></pre>
   <script src="index.js"></script>
