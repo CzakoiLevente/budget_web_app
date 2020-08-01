@@ -9,7 +9,8 @@ const app = express();
 const mysql = require('mysql');
 
 
-app.use(bp.urlencoded({ extended: false }));
+//app.use(bp.urlencoded({ extended: false }));
+app.use(bp.text());
 app.use(bp.json());
 //ensuring your server handles incoming requests through the express middleware. So, now parsing the body of incoming requests is part of the procedure that your middleware takes when handling incoming requests
 app.use(require("morgan")("dev"));
@@ -57,6 +58,15 @@ app.get('/get', (req, res) => {
 
 app.post('/insert', (req, res) => {
   database.query(`INSERT INTO test (quantity, price, item) VALUES (1,1,'asd');`, (err, row) => {
+    let x = req;
+    console.log('req.body: ' + x.body);
+    console.log('type of req:  ' + typeof x);
+    console.log('type of body:  ' + typeof x.body);
+    console.log(x.body.price);
+    console.log(x.body.item);
+    console.log(JSON.stringify(x.body));
+
+
     if (err) {
       console.log('DB query failed');
       res.status(500).send();

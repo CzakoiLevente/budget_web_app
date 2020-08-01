@@ -76,10 +76,25 @@ function modifyRow() {
 
 function submit_purchase() {
   console.log("Purchase submitted!");
+  http.open('POST', '/insert');
+  //http.setRequestHeader("Content-type", "text/plain");
+  http.setRequestHeader("Content-type", "application/json");
+  http.onload = () => {
+    //let response = http.responseText;
+    console.log('response');
+  };
+  http.send(JSON.stringify(getFormData()));
+  //http.send('hello');
+  //getList();
+};
+
+function getFormData() {
   let formData = {
     item : formItem.value,
     quantity : formQuantity.value,
     price : formPrice.value 
   };
-  console.log(formData.item + ' ' + formData.quantity + ' ' + formData.price);
+  console.log('formData');
+  console.log(formData);
+  return formData;
 };
