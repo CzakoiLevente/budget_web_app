@@ -79,13 +79,14 @@ function submit_purchase() {
   http.open('POST', '/insert');
   //http.setRequestHeader("Content-type", "text/plain");
   http.setRequestHeader("Content-type", "application/json");
+  //setting request header will tell server how to interpret (in this case: text or json)
   http.onload = () => {
     //let response = http.responseText;
     console.log('response');
   };
   http.send(JSON.stringify(getFormData()));
   //http.send('hello');
-  //getList();
+  getList();
 };
 
 function getFormData() {

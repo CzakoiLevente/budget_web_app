@@ -9,10 +9,14 @@ const app = express();
 const mysql = require('mysql');
 
 
+//ensuring your server to handle incoming requests through the express middleware. So, now parsing the body of incoming requests is part of the procedure that your middleware takes when handling incoming requests
 //app.use(bp.urlencoded({ extended: false }));
+//this middleware is responsible for interpreting incoming req as URL
 app.use(bp.text());
+//this middleware is responsible for interpreting incoming req as TEXT
 app.use(bp.json());
-//ensuring your server handles incoming requests through the express middleware. So, now parsing the body of incoming requests is part of the procedure that your middleware takes when handling incoming requests
+//this middleware is responsible for interpreting incoming req as JSON
+
 app.use(require("morgan")("dev"));
 //morgan is a middleware utility tool that logs the server events
 app.use(express.static('frontend'));
@@ -39,14 +43,14 @@ database.connect((err) => {
 });
 
 app.get('/', (req, res) => {
-  //res.sendFile(path.join(__dirname + '/')); -> __dirname is setting root folder
+  //res.sendFile(path.join(__dirname + '/'));  -> __dirname is setting root folder
   res.sendFile('index.html');
   //will try to send html from root, but express.static() will search for html in frontend folder recursively 
 });
 
 app.get('/get', (req, res) => {
   //console.log('app/get');
-  database.query('SELECT * FROM test;', (err, rows) => {
+  database.query(`SELECT * FROM test;`, (err, rows) => {
     if (err) {
       console.log('select all from db failed');
       res.sendStatus(501);
@@ -57,7 +61,8 @@ app.get('/get', (req, res) => {
 });
 
 app.post('/insert', (req, res) => {
-  database.query(`INSERT INTO test (quantity, price, item) VALUES (1,1,'asd');`, (err, row) => {
+  database.query(`INSERT INTO test (quantity, price, item) VALUES ('${req.body.quantity}', '${req.body.price}', '${req.body.item}');`, (err, row) => {
+    /*
     let x = req;
     console.log('req.body: ' + x.body);
     console.log('type of req:  ' + typeof x);
@@ -65,7 +70,7 @@ app.post('/insert', (req, res) => {
     console.log(x.body.price);
     console.log(x.body.item);
     console.log(JSON.stringify(x.body));
-
+    */
 
     if (err) {
       console.log('DB query failed');
@@ -77,7 +82,7 @@ app.post('/insert', (req, res) => {
 });
 
 app.delete( '/delete', (req, res) => {
-  database.query('DELETE FROM test ORDER BY `item-id` DESC LIMIT 1;', (err, rows) => {
+  database.query(`DELETE FROM test ORDER BY \`item-id\` DESC LIMIT 1;`, (err, rows) => {
     if (err) {
       res.sendStatus(502);
     } else {
