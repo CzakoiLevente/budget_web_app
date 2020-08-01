@@ -7,4 +7,7 @@
 
 - be able to save credit cards
 
-- 
+- ba able to handle currencies
+  * add feature to convert
+  * convert currencies as per date
+  * https://exchangeratesapi.io/
