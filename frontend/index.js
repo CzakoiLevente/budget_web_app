@@ -33,10 +33,8 @@ function insertRow() {
   //console.log('button working');
   http.open('POST', '/insert');
   http.setRequestHeader("Content-type", "application/json");
-
   http.onload = () => {
   };
-  console.log(JSON.stringify(randomPurchase()));
   http.send(JSON.stringify(randomPurchase()));
   getList();
 };
@@ -96,6 +94,8 @@ function getFormData() {
 function addToTable(arr) {
   tableBody.innerText = '';
   for (let i = 0; i < arr.length; i++) {
+    let checkBox = document.createElement("input");
+    let tableData = document.createElement("td")
     let tableRow = document.createElement("tr");
     tableBody.appendChild(tableRow);
     let tableItem = document.createElement("td");
@@ -106,6 +106,8 @@ function addToTable(arr) {
     let tablePayment = document.createElement("td");
     let tableCurrency = document.createElement("td");
     
+    tableRow.appendChild(tableData);
+    tableData.appendChild(checkBox);
     tableRow.appendChild(tableItem);
     tableRow.appendChild(tableQuantity);
     tableRow.appendChild(tablePrice);
@@ -114,6 +116,9 @@ function addToTable(arr) {
     tableRow.appendChild(tableShop);
     tableRow.appendChild(tableTimeStamp);
 
+    checkBox.setAttribute("id", `${i}`);
+    checkBox.setAttribute("type", `checkbox`);
+    tableRow.setAttribute("id", `${i}`);
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
     tablePrice.innerText = arr[i].price;

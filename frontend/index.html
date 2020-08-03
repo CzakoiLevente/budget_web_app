@@ -18,29 +18,31 @@
   </p>
 
   <div id="form">
+    <div>
+    </div>
     <div id="form_row">
       <label for="item_name">Purchased item:</label>
-      <input type="text" name="name" id="formItem" required>    
+      <input type="text" name="name" id="formItem" required placeholder="Purchased item…">    
     </div>
     <div id="form_row">
       <label for="item_quantity">Quantity:</label>
-      <input type="number" name="" id="formQuantity">
+      <input type="number" name="" id="formQuantity" required placeholder="Quantity...">
     </div>
     <div id="form_row">
       <label for="item_price">Price:</label>
-      <input type="number" name="" id="formPrice">
+      <input type="number" name="" id="formPrice" required placeholder="Price...">
     </div>
     <div id="form-row"> 
       <label for="item_currency">Currency</label>
-      <input type="text" id="formCurrency">
+      <input type="text" id="formCurrency" required placeholder="Currency...">
     </div>
     <div id="form-row"> 
       <label for="item_payment">Payment</label>
-      <input type="text" id="formPayment">
+      <input type="text" id="formPayment" required placeholder="Payment form...">
     </div>
     <div id="form-row"> 
       <label for="item_shop">Shop</label>
-      <input type="text" id="formShop">
+      <input type="text" id="formShop" required placeholder="Name of the shop...">
     </div>
     <button onclick="submit_purchase()">"Submit purchase!"</button>   
   </div>
@@ -48,6 +50,9 @@
   <table id="table">
     <th>
       <tr>
+        <td>
+          <input type="checkbox" id="main-check">
+        </td>
         <td>Item</td>
         <td>Quantity</td>
         <td>Price</td>
@@ -57,11 +62,10 @@
         <td>Timestamp</td>
       </tr>
     </th>
-    <tbody id="table_body">
-      
+    <tbody id="table_body">      
     </tbody>
   </table>
-
+  
   <script src="index.js"></script>
 </body>
 </html>
