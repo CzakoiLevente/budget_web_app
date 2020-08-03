@@ -7,7 +7,7 @@
 
 - be able to save credit cards
 
-- ba able to handle currencies
+- ba able to handle currencies https://www.npmjs.com/package/currency-codes
   * add feature to convert
   * convert currencies as per date
   * https://exchangeratesapi.io/
