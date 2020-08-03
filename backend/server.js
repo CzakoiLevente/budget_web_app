@@ -52,7 +52,7 @@ app.get('/get', (req, res) => {
   //console.log('app/get');
   database.query(`SELECT * FROM test;`, (err, rows) => {
     if (err) {
-      console.log('select all from db failed');
+      console.log('select all records from db failed');
       res.sendStatus(501);
     } else {
       res.send(rows);
@@ -61,18 +61,9 @@ app.get('/get', (req, res) => {
 });
 
 app.post('/insert', (req, res) => {
-  database.query(`INSERT INTO test (quantity, price, item) VALUES ('${req.body.quantity}', '${req.body.price}', '${req.body.item}');`, (err, row) => {
-    /*
-    let x = req;
-    console.log('req.body: ' + x.body);
-    console.log('type of req:  ' + typeof x);
-    console.log('type of body:  ' + typeof x.body);
-    console.log(x.body.price);
-    console.log(x.body.item);
-    console.log(JSON.stringify(x.body));
-    */
-
+  database.query(`INSERT INTO test (quantity, price, item, shop, currency, payment_method) VALUES ('${req.body.quantity}', '${req.body.price}', '${req.body.item}', '${req.body.shop}', '${req.body.currency}', '${req.body.payment}');`, (err, row) => {
     if (err) {
+      console.log(err);
       console.log('DB query failed');
       res.status(500).send();
     } else {  

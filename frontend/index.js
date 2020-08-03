@@ -1,27 +1,30 @@
 'use strict';
 
-//console.log('asda');
 const http = new XMLHttpRequest;
 
 let body;
+let tableBody;
 let buttonInsert;
 let buttonList;
-let entries;
 let formItem;
 let formQuantity;
 let formPrice;
-let tableBody;
+let formCurrency;
+let formPayment;
+let formShop;
 
 window.onload = () => {
 
-  entries = document.getElementById('entries')
   body = document.getElementById('body');
+  tableBody = document.getElementById('table_body');
   buttonInsert = document.getElementById('insert');
   buttonList = document.getElementById('list');
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
   formQuantity = document.getElementById('formQuantity');
-  tableBody = document.getElementById('table_body');
+  formCurrency = document.getElementById('formCurrency');
+  formPayment = document.getElementById('formPayment');
+  formShop = document.getElementById('formShop');
 
   getList();
 };
@@ -29,11 +32,12 @@ window.onload = () => {
 function insertRow() {
   //console.log('button working');
   http.open('POST', '/insert');
+  http.setRequestHeader("Content-type", "application/json");
+
   http.onload = () => {
-    let response = http.responseText;
-    console.log(response);
   };
-  http.send();
+  console.log(JSON.stringify(randomPurchase()));
+  http.send(JSON.stringify(randomPurchase()));
   getList();
 };
 
@@ -49,8 +53,6 @@ function getList() {
 function deleteRow() {
   http.open('DELETE', '/delete');
   http.onload = () => {
-    let response = http.responseText;
-    console.log(response);
   };
   http.send();
   getList();
@@ -93,16 +95,60 @@ function addToTable(arr) {
     let tableItem = document.createElement("td");
     let tableQuantity = document.createElement("td");
     let tablePrice = document.createElement("td");
-    let tableTimeStamp = document.createElement("td");        
+    let tableTimeStamp = document.createElement("td");
+    let tableShop = document.createElement("td");
+    let tablePayment = document.createElement("td");
+    let tableCurrency = document.createElement("td");
     
     tableRow.appendChild(tableItem);
     tableRow.appendChild(tableQuantity);
     tableRow.appendChild(tablePrice);
+    tableRow.appendChild(tableCurrency);
+    tableRow.appendChild(tablePayment);
+    tableRow.appendChild(tableShop);
     tableRow.appendChild(tableTimeStamp);
 
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
     tablePrice.innerText = arr[i].price;
-    tableTimeStamp.innerText = arr[i].price;
+    tableTimeStamp.innerText = arr[i].timestamp.replace('T', ' ').slice(0, 19);
+    tableCurrency.innerHTML = arr[i].currency;
+    tablePayment.innerHTML = arr[i].payment_method;
+    tableShop.innerHTML = arr[i].shop;
   };
+};
+
+function randomPurchase() {
+  console.log('random purchase');
+  return {
+    item: rnStr(4).toLocaleLowerCase(),
+    quantity: rnNumber(2),
+    price: rnNumber(3),
+    currency: rnStr(3).toLocaleUpperCase(),
+    payment: rnPayment(),
+    shop: rnStr(4).toLocaleUpperCase()
+  };
+};
+
+function rnStr(num) {
+  let result = '';
+   let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   let charactersLength = characters.length;
+   for ( let i = 0; i < num; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+};
+
+function rnNumber(num) {
+  let result = '';
+  for (let i = 1; i < num + 1; i++) {
+    result += Math.floor(Math.random() * num);
+  };
+  return parseInt(result + 1);
+};
+
+function rnPayment() {
+  let payment = ['cash', 'card', 'tansfer', 'crypto', 'payment in sex'];
+  return payment[Math.floor(Math.random() * 5)];
 };

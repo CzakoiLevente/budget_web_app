@@ -9,13 +9,14 @@
 <body class="body" id="body">
   <p>HTML: rebirth from ashes starting</p>
   <p>
-    <button id="insert" onclick="insertRow()">insert</button>
+    <button id="insert" onclick="insertRow()">random purchase</button>
     <button id="delete" onclick="deleteRow()">delete row</button>
     <!-- 
       <button id="list" onclick="getList()">list entries</button>  
     -->
     <button id="modify" onclick="modifyRow()">modify</button>
   </p>
+
   <p id="form">
     <div id="form_row">
       <label for="item_name">Purchased item:</label>
@@ -29,16 +30,30 @@
       <label for="item_price">Price:</label>
       <input type="number" name="" id="formPrice">
     </div>
+    <div id="form-row"> 
+      <label for="item_currency">Currency</label>
+      <input type="text" id="formCurrency">
+    </div>
+    <div id="form-row"> 
+      <label for="item_payment">Payment</label>
+      <input type="text" id="formPayment">
+    </div>
+    <div id="form-row"> 
+      <label for="item_shop">Shop</label>
+      <input type="text" id="formShop">
+    </div>
     <button onclick="submit_purchase()">"Submit purchase!"</button>   
   </p>
-  <pre id="entries"></pre>
-
+  
   <table id="table">
     <th>
       <tr>
         <td>Item</td>
         <td>Quantity</td>
         <td>Price</td>
+        <td>Currency</td>
+        <td>Payment</td>
+        <td>Shop</td>
         <td>Timestamp</td>
       </tr>
     </th>

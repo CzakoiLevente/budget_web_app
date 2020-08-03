@@ -12,8 +12,9 @@ CREATE TABLE IF NOT EXISTS `test` (
   `price` int (10) NOT NULL,
   `item` VARCHAR (200) NOT NULL,
   `timestamp` TIMESTAMP,
-  `shop` VARCHAR (30),
-  `payment_method` VARCHAR (30)
+  `shop` VARCHAR (30) NOT NULL,
+  `payment_method` VARCHAR (30) NOT NULL,
+  `currency` VARCHAR (5) NOT NULL
 );
 
 INSERT INTO test (quantity, price, item) VALUES (1,1,'asd');
