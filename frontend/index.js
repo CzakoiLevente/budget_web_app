@@ -79,11 +79,17 @@ function getFormData() {
   let formData = {
     item: formItem.value,
     quantity: formQuantity.value,
-    price: formPrice.value
+    price: formPrice.value,
+    currency: formCurrency.value,
+    payment: formPayment.value,
+    shop: formShop.value
   };
-  formItem.value = null;
-  formQuantity.value = null;
-  formPrice.value = null;  
+  //formCurrency.value = null;
+  //formPayment.value = null;
+  //formShop.value = null;
+  //formItem.value = null;
+  //formQuantity.value = null;
+  //formPrice.value = null;  
   return formData;
 };
 
