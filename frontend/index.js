@@ -10,6 +10,7 @@ let entries;
 let formItem;
 let formQuantity;
 let formPrice;
+let tableBody;
 
 window.onload = () => {
 
@@ -20,10 +21,7 @@ window.onload = () => {
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
   formQuantity = document.getElementById('formQuantity');
-
-  //let response = http.responseText;
-  //console.log('data = ' + data);
-  //console.log('http onload log');
+  tableBody = document.getElementById('table_body');
 
   getList();
 };
@@ -40,17 +38,10 @@ function insertRow() {
 };
 
 function getList() {
-  //console.log('list button working');
   http.open('GET', '/get');
   http.onload = () => {
-    let response = http.responseText;
-    const obj = JSON.parse(response);    //expressnek kéne csinálni, megnézni hogy kell beállítani!
-    let str = JSON.stringify(obj, null, 2);
-    //console.log('response = ' + data);
-    //let row = document.createElement('pre');
-    //console.log('body -> ' + body);
-    //body.appendChild(row);
-    entries.innerHTML = str;
+    let response = JSON.parse(http.responseText);
+    addToTable(response);
   };
   http.send();
 };
@@ -65,17 +56,11 @@ function deleteRow() {
   getList();
 };
 
-let counter = 0;
 function modifyRow() {
-  counter += 1;
-  if(counter === 10) {
     window.alert("Jó játék, hogy nyomkodod??");
-    counter = 0;
-  }
 };
 
 function submit_purchase() {
-  console.log("Purchase submitted!");
   http.open('POST', '/insert');
   //http.setRequestHeader("Content-type", "text/plain");
   http.setRequestHeader("Content-type", "application/json");
@@ -85,17 +70,39 @@ function submit_purchase() {
     console.log('response');
   };
   http.send(JSON.stringify(getFormData()));
-  //http.send('hello');
   getList();
 };
 
 function getFormData() {
   let formData = {
-    item : formItem.value,
-    quantity : formQuantity.value,
-    price : formPrice.value 
+    item: formItem.value,
+    quantity: formQuantity.value,
+    price: formPrice.value
   };
-  console.log('formData');
-  console.log(formData);
+  formItem.value = null;
+  formQuantity.value = null;
+  formPrice.value = null;  
   return formData;
+};
+
+function addToTable(arr) {
+  tableBody.innerText = '';
+  for (let i = 0; i < arr.length; i++) {
+    let tableRow = document.createElement("tr");
+    tableBody.appendChild(tableRow);
+    let tableItem = document.createElement("td");
+    let tableQuantity = document.createElement("td");
+    let tablePrice = document.createElement("td");
+    let tableTimeStamp = document.createElement("td");        
+    
+    tableRow.appendChild(tableItem);
+    tableRow.appendChild(tableQuantity);
+    tableRow.appendChild(tablePrice);
+    tableRow.appendChild(tableTimeStamp);
+
+    tableItem.innerText = arr[i].item;
+    tableQuantity.innerText = arr[i].quantity;
+    tablePrice.innerText = arr[i].price;
+    tableTimeStamp.innerText = arr[i].price;
+  };
 };
