@@ -12,6 +12,9 @@ let formPrice;
 let formCurrency;
 let formPayment;
 let formShop;
+let mainCheck;
+let databaseRecords;
+let checks;
 
 window.onload = () => {
 
@@ -25,12 +28,26 @@ window.onload = () => {
   formCurrency = document.getElementById('formCurrency');
   formPayment = document.getElementById('formPayment');
   formShop = document.getElementById('formShop');
-
+  mainCheck = document.getElementById('main-check');
+  
+  mainCheck.addEventListener('change', function () {
+    if (this.checked) {
+      for (let i = 0; i < checks.length; i++) {
+        checks[i].checked = true;
+      };
+      mainCheck.checked = true;   
+    } else {
+          for (let i = 0; i < checks.length; i++) {
+            checks[i].checked = false;
+          };
+          mainCheck.checked = false;        
+    }
+  });
   getList();
 };
 
+
 function insertRow() {
-  //console.log('button working');
   http.open('POST', '/insert');
   http.setRequestHeader("Content-type", "application/json");
   http.onload = () => {
@@ -43,6 +60,7 @@ function getList() {
   http.open('GET', '/get');
   http.onload = () => {
     let response = JSON.parse(http.responseText);
+    databaseRecords = response;
     addToTable(response);
   };
   http.send();
@@ -57,7 +75,11 @@ function deleteRow() {
 };
 
 function modifyRow() {
-    window.alert("Jó játék, hogy nyomkodod??");
+  //window.alert("Jó játék, hogy nyomkodod??");
+  //console.log('modify button clicked');
+  let items = getPurchaseData(getCheckes(checks));
+  console.log(items);
+  return items;
 };
 
 function submit_purchase() {
@@ -67,7 +89,7 @@ function submit_purchase() {
   //setting request header will tell server how to interpret (in this case: text or json)
   http.onload = () => {
     //let response = http.responseText;
-    console.log('response');
+    //console.log('response');
   };
   http.send(JSON.stringify(getFormData()));
   getList();
@@ -92,10 +114,11 @@ function getFormData() {
 };
 
 function addToTable(arr) {
+  console.log('creating table');
   tableBody.innerText = '';
   for (let i = 0; i < arr.length; i++) {
     let checkBox = document.createElement("input");
-    let tableData = document.createElement("td")
+    let tableData = document.createElement("td");
     let tableRow = document.createElement("tr");
     tableBody.appendChild(tableRow);
     let tableItem = document.createElement("td");
@@ -105,8 +128,9 @@ function addToTable(arr) {
     let tableShop = document.createElement("td");
     let tablePayment = document.createElement("td");
     let tableCurrency = document.createElement("td");
+    let rowNumber = document.createElement("td");
     
-    tableRow.appendChild(tableData);
+    tableRow.appendChild(rowNumber);
     tableData.appendChild(checkBox);
     tableRow.appendChild(tableItem);
     tableRow.appendChild(tableQuantity);
@@ -115,10 +139,14 @@ function addToTable(arr) {
     tableRow.appendChild(tablePayment);
     tableRow.appendChild(tableShop);
     tableRow.appendChild(tableTimeStamp);
-
-    checkBox.setAttribute("id", `${i}`);
+    tableRow.appendChild(tableData);
+    
+    checkBox.setAttribute("class", "check");
     checkBox.setAttribute("type", `checkbox`);
-    tableRow.setAttribute("id", `${i}`);
+    checkBox.setAttribute("id", `${i + 1}`);
+    //tableRow.setAttribute("id", `${i + 1}`);
+    tableRow.setAttribute("class", "table_row");
+    rowNumber.innerText = `${i + 1}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
     tablePrice.innerText = arr[i].price;
@@ -127,10 +155,13 @@ function addToTable(arr) {
     tablePayment.innerHTML = arr[i].payment_method;
     tableShop.innerHTML = arr[i].shop;
   };
+  console.log('creating table finished');
+  console.log('checks starting');
+  checks = document.getElementsByClassName("check");
+  console.log('checks ended');
 };
 
 function randomPurchase() {
-  console.log('random purchase');
   return {
     item: rnStr(4).toLocaleLowerCase(),
     quantity: rnNumber(2),
@@ -143,12 +174,12 @@ function randomPurchase() {
 
 function rnStr(num) {
   let result = '';
-   let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   let charactersLength = characters.length;
-   for ( let i = 0; i < num; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
+  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let charactersLength = characters.length;
+  for (let i = 0; i < num; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  };
+  return result;
 };
 
 function rnNumber(num) {
@@ -162,4 +193,36 @@ function rnNumber(num) {
 function rnPayment() {
   let payment = ['cash', 'card', 'tansfer', 'crypto', 'payment in sex'];
   return payment[Math.floor(Math.random() * 5)];
+};
+
+function getCheckes(checks) {  
+  let checkedItems = [];
+  for (let i = 0; i < checks.length; i++) {
+    if (checks[i].checked === true) {
+      checkedItems.push(checks[i]);
+    }
+  };
+  console.log('checkedItems = ', checkedItems);
+  return checkedItems;
+};
+
+function getPurchaseData(arr) {
+  console.log('arr = ', arr);
+  let purchases = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let elem of databaseRecords) {
+      if (+arr[i].id === +elem['item-id']) {
+        let x = {
+          item: `${elem.item}`,
+          quantity: `${elem.quantity}`,
+          price: `${elem.price}`,
+          currency: `${elem.currency}`,
+          payment: `${elem.payment}`,
+          shop: `${elem.shop}`
+        };
+        purchases.push(x);
+      }
+    };
+  };
+  return purchases;
 };

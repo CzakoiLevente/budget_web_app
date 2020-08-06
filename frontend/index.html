@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phoenix</title>
   <link rel="stylesheet" type="text/css" media="screen" href="index.css">
 </head>
+
 <body class="body" id="body">
   <p>HTML: rebirth from ashes starting</p>
   <p>
@@ -22,7 +24,7 @@
     </div>
     <div id="form_row">
       <label for="item_name">Purchased item:</label>
-      <input type="text" name="name" id="formItem" required placeholder="Purchased item…">    
+      <input type="text" name="name" id="formItem" required placeholder="Purchased item…">
     </div>
     <div id="form_row">
       <label for="item_quantity">Quantity:</label>
@@ -32,27 +34,25 @@
       <label for="item_price">Price:</label>
       <input type="number" name="" id="formPrice" required placeholder="Price...">
     </div>
-    <div id="form-row"> 
+    <div id="form-row">
       <label for="item_currency">Currency</label>
       <input type="text" id="formCurrency" required placeholder="Currency...">
     </div>
-    <div id="form-row"> 
+    <div id="form-row">
       <label for="item_payment">Payment</label>
       <input type="text" id="formPayment" required placeholder="Payment form...">
     </div>
-    <div id="form-row"> 
+    <div id="form-row">
       <label for="item_shop">Shop</label>
       <input type="text" id="formShop" required placeholder="Name of the shop...">
     </div>
-    <button onclick="submit_purchase()">"Submit purchase!"</button>   
+    <button onclick="submit_purchase()">"Submit purchase!"</button>
   </div>
-  
+
   <table id="table">
     <th>
       <tr>
-        <td>
-          <input type="checkbox" id="main-check">
-        </td>
+        <td>No. </td>
         <td>Item</td>
         <td>Quantity</td>
         <td>Price</td>
@@ -60,12 +60,15 @@
         <td>Payment</td>
         <td>Shop</td>
         <td>Timestamp</td>
+        <td>
+          <input type="checkbox" id="main-check">
+        </td>
       </tr>
     </th>
-    <tbody id="table_body">      
+    <tbody id="table_body">
     </tbody>
   </table>
-  
+
   <script src="index.js"></script>
 </body>
 </html>
