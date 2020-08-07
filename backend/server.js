@@ -83,8 +83,10 @@ app.delete( '/delete', (req, res) => {
   console.log('req body = ', req.body);
   console.log(typeof req.body);
   console.log('--------------------');
-  //console.log('parsed req body = ', JSON.parse(req.body));
-  //console.log(typeof JSON.parse(req.body));
+  console.log('parsed req body = ', JSON.parse(req.body));
+  let x = JSON.parse(req.body);
+  console.log(x[0]);
+  console.log(typeof x);
   //JSON.parse()
   /*
   database.query(`DELETE FROM test ORDER BY \`item-id\` DESC LIMIT 1;`, (err, rows) => {

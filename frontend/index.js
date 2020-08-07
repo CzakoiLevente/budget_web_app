@@ -71,7 +71,7 @@ function getList() {
 
 function deleteRow() {
   http.open('DELETE', '/delete');
-  //http.setRequestHeader('Content-type', 'text/plain')
+  http.setRequestHeader('Content-type', 'text/plain')
   http.onload = () => {
   };
 
@@ -84,7 +84,7 @@ function deleteRow() {
  let items = getPurchaseData(getCheckes(checks));
  console.log(items);
 
-  http.send(items);
+  http.send(JSON.stringify(items));
   getList();
 };
 
@@ -98,7 +98,7 @@ function modifyRow() {
 function submit_purchase() {
   http.open('POST', '/insert');
   //http.setRequestHeader("Content-type", "text/plain");
-  http.setRequestHeader("Content-type", "application/json");
+  http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
   //setting request header will tell server how to interpret (in this case: text or json)
   http.onload = () => {
     //let response = http.responseText;
