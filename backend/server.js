@@ -73,6 +73,20 @@ app.post('/insert', (req, res) => {
 });
 
 app.delete( '/delete', (req, res) => {
+  console.log('/del inc');
+  for (let i = 0; i < req.body.length; i++) {
+    
+  }
+  console.log('req.body[i] = ', req.body[0]);
+  console.log(typeof req.body[0]);
+  console.log('--------------------');
+  console.log('req body = ', req.body);
+  console.log(typeof req.body);
+  console.log('--------------------');
+  //console.log('parsed req body = ', JSON.parse(req.body));
+  //console.log(typeof JSON.parse(req.body));
+  //JSON.parse()
+  /*
   database.query(`DELETE FROM test ORDER BY \`item-id\` DESC LIMIT 1;`, (err, rows) => {
     if (err) {
       res.sendStatus(502);
@@ -80,4 +94,5 @@ app.delete( '/delete', (req, res) => {
       res.sendStatus(201);
     }
   });
+  */
 });

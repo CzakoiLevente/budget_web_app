@@ -1,5 +1,7 @@
 'use strict';
 
+//const { raw } = require("body-parser");
+
 const http = new XMLHttpRequest;
 
 let body;
@@ -61,6 +63,7 @@ function getList() {
   http.onload = () => {
     let response = JSON.parse(http.responseText);
     databaseRecords = response;
+    //console.log(databaseRecords);
     addToTable(response);
   };
   http.send();
@@ -68,18 +71,28 @@ function getList() {
 
 function deleteRow() {
   http.open('DELETE', '/delete');
+  //http.setRequestHeader('Content-type', 'text/plain')
   http.onload = () => {
   };
-  http.send();
+
+  /*
+  if (window.confirm("Do you really want to leave?")) { 
+    //window.open( "exit.html", "Thanks for Visiting!");
+  }
+  */
+
+ let items = getPurchaseData(getCheckes(checks));
+ console.log(items);
+
+  http.send(items);
   getList();
 };
 
 function modifyRow() {
   //window.alert("Jó játék, hogy nyomkodod??");
-  //console.log('modify button clicked');
-  let items = getPurchaseData(getCheckes(checks));
-  console.log(items);
-  return items;
+  console.log('modify button clicked');
+  
+  //return ;
 };
 
 function submit_purchase() {
@@ -114,7 +127,6 @@ function getFormData() {
 };
 
 function addToTable(arr) {
-  console.log('creating table');
   tableBody.innerText = '';
   for (let i = 0; i < arr.length; i++) {
     let checkBox = document.createElement("input");
@@ -128,9 +140,9 @@ function addToTable(arr) {
     let tableShop = document.createElement("td");
     let tablePayment = document.createElement("td");
     let tableCurrency = document.createElement("td");
-    let rowNumber = document.createElement("td");
+    let itemId = document.createElement("td");
     
-    tableRow.appendChild(rowNumber);
+    tableRow.appendChild(itemId);
     tableData.appendChild(checkBox);
     tableRow.appendChild(tableItem);
     tableRow.appendChild(tableQuantity);
@@ -143,10 +155,10 @@ function addToTable(arr) {
     
     checkBox.setAttribute("class", "check");
     checkBox.setAttribute("type", `checkbox`);
-    checkBox.setAttribute("id", `${i + 1}`);
+    checkBox.setAttribute("id", `${arr[i]['item-id']}`);
     //tableRow.setAttribute("id", `${i + 1}`);
     tableRow.setAttribute("class", "table_row");
-    rowNumber.innerText = `${i + 1}`;
+    itemId.innerText = `${arr[i]['item-id']}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
     tablePrice.innerText = arr[i].price;
@@ -155,10 +167,7 @@ function addToTable(arr) {
     tablePayment.innerHTML = arr[i].payment_method;
     tableShop.innerHTML = arr[i].shop;
   };
-  console.log('creating table finished');
-  console.log('checks starting');
   checks = document.getElementsByClassName("check");
-  console.log('checks ended');
 };
 
 function randomPurchase() {
@@ -202,16 +211,15 @@ function getCheckes(checks) {
       checkedItems.push(checks[i]);
     }
   };
-  console.log('checkedItems = ', checkedItems);
   return checkedItems;
 };
 
 function getPurchaseData(arr) {
-  console.log('arr = ', arr);
-  let purchases = [];
+  let purchasesId = [];
   for (let i = 0; i < arr.length; i++) {
     for (let elem of databaseRecords) {
       if (+arr[i].id === +elem['item-id']) {
+        /*
         let x = {
           item: `${elem.item}`,
           quantity: `${elem.quantity}`,
@@ -220,9 +228,10 @@ function getPurchaseData(arr) {
           payment: `${elem.payment}`,
           shop: `${elem.shop}`
         };
-        purchases.push(x);
+        */
+        purchasesId.push(elem['item-id']);
       }
     };
   };
-  return purchases;
+  return purchasesId;
 };
