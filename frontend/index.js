@@ -71,7 +71,7 @@ function getList() {
 
 function deleteRow() {
   http.open('DELETE', '/delete');
-  http.setRequestHeader('Content-type', 'text/plain')
+  http.setRequestHeader('Content-type', 'text/plain');
   http.onload = () => {
   };
 
@@ -81,10 +81,10 @@ function deleteRow() {
   }
   */
 
- let items = getPurchaseData(getCheckes(checks));
- console.log(items);
+ let ids = getPurchaseData(getCheckes(checks));
+ console.log(ids);
 
-  http.send(JSON.stringify(items));
+  http.send(JSON.stringify(ids));
   getList();
 };
 
@@ -219,16 +219,6 @@ function getPurchaseData(arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let elem of databaseRecords) {
       if (+arr[i].id === +elem['item-id']) {
-        /*
-        let x = {
-          item: `${elem.item}`,
-          quantity: `${elem.quantity}`,
-          price: `${elem.price}`,
-          currency: `${elem.currency}`,
-          payment: `${elem.payment}`,
-          shop: `${elem.shop}`
-        };
-        */
         purchasesId.push(elem['item-id']);
       }
     };

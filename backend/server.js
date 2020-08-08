@@ -49,7 +49,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/get', (req, res) => {
-  //console.log('app/get');
   database.query(`SELECT * FROM test;`, (err, rows) => {
     if (err) {
       console.log('select all records from db failed');
@@ -67,34 +66,21 @@ app.post('/insert', (req, res) => {
       console.log('DB query failed');
       res.status(500).send();
     } else {  
-      res.sendStatus(200);
+      res.status(200).send();
     }
   });
 });
 
 app.delete( '/delete', (req, res) => {
-  console.log('/del inc');
-  for (let i = 0; i < req.body.length; i++) {
-    
-  }
-  console.log('req.body[i] = ', req.body[0]);
-  console.log(typeof req.body[0]);
-  console.log('--------------------');
-  console.log('req body = ', req.body);
-  console.log(typeof req.body);
-  console.log('--------------------');
-  console.log('parsed req body = ', JSON.parse(req.body));
-  let x = JSON.parse(req.body);
-  console.log(x[0]);
-  console.log(typeof x);
-  //JSON.parse()
-  /*
-  database.query(`DELETE FROM test ORDER BY \`item-id\` DESC LIMIT 1;`, (err, rows) => {
-    if (err) {
-      res.sendStatus(502);
-    } else {
-      res.sendStatus(201);
-    }
-  });
-  */
+  let idArr = JSON.parse(req.body);
+  for (let i = 0; i < idArr.length; i++) {
+    database.query(`DELETE FROM test WHERE \`item-id\`='${idArr[i]}';`, (err, rows) => {
+      if (err) {
+        console.log('DB ERROR', '\n', err);
+        res.status(500).send();
+      } else {
+        res.status(200).send();
+      }      
+    });
+  };
 });
