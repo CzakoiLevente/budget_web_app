@@ -31,18 +31,18 @@ window.onload = () => {
   formPayment = document.getElementById('formPayment');
   formShop = document.getElementById('formShop');
   mainCheck = document.getElementById('main-check');
-  
+
   mainCheck.addEventListener('change', function () {
     if (this.checked) {
       for (let i = 0; i < checks.length; i++) {
         checks[i].checked = true;
       };
-      mainCheck.checked = true;   
+      mainCheck.checked = true;
     } else {
-          for (let i = 0; i < checks.length; i++) {
-            checks[i].checked = false;
-          };
-          mainCheck.checked = false;        
+      for (let i = 0; i < checks.length; i++) {
+        checks[i].checked = false;
+      };
+      mainCheck.checked = false;
     }
   });
   getList();
@@ -81,8 +81,8 @@ function deleteRow() {
   }
   */
 
- let ids = getPurchaseData(getCheckes(checks));
- console.log(ids);
+  let ids = getPurchaseData(getCheckes(checks));
+  console.log(ids);
 
   http.send(JSON.stringify(ids));
   getList();
@@ -91,8 +91,6 @@ function deleteRow() {
 function modifyRow() {
   //window.alert("Jó játék, hogy nyomkodod??");
   console.log('modify button clicked');
-  let x = document.getElementById("table").rows.item(1).innerHTML;
-  console.log(x);
   //return ;
 };
 
@@ -143,7 +141,7 @@ function addToTable(arr) {
     let tablePayment = document.createElement("td");
     let tableCurrency = document.createElement("td");
     let itemId = document.createElement("td");
-    
+
     tableRow.appendChild(itemId);
     tableData.appendChild(checkBox);
     tableRow.appendChild(tableItem);
@@ -154,12 +152,13 @@ function addToTable(arr) {
     tableRow.appendChild(tableShop);
     tableRow.appendChild(tableTimeStamp);
     tableRow.appendChild(tableData);
-    
+
     checkBox.setAttribute("class", "check");
     checkBox.setAttribute("type", `checkbox`);
     checkBox.setAttribute("id", `${arr[i]['item-id']}`);
     //tableRow.setAttribute("id", `${i + 1}`);
     tableRow.setAttribute("class", "table_row");
+    tableRow.setAttribute("id", `${arr[i]['item-id']}`);
     itemId.innerText = `${arr[i]['item-id']}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
@@ -206,7 +205,7 @@ function rnPayment() {
   return payment[Math.floor(Math.random() * 5)];
 };
 
-function getCheckes(checks) {  
+function getCheckes(checks) {
   let checkedItems = [];
   for (let i = 0; i < checks.length; i++) {
     if (checks[i].checked === true) {
@@ -226,4 +225,31 @@ function getPurchaseData(arr) {
     };
   };
   return purchasesId;
+};
+
+document.addEventListener('click', function (e) {
+  e = e || window.event;
+  var target = e.target || e.srcElement,
+      text = target.textContent || target.innerText;
+  if (target.nodeName === 'TD') {
+    let rowId = parseInt(target.parentElement.id);
+    fillForm(getRowData(rowId));
+  } 
+}, false);
+
+function fillForm(obj) {
+  formItem.value = obj.item;
+  formQuantity.value = obj.quantity,
+    formPrice.value = obj.price;
+  formCurrency.value = obj.currency;
+  formPayment.value = obj.payment;
+  formShop.value = obj.shop;
+};
+
+function getRowData(num) {
+  for (let record of databaseRecords) {
+    if (num === record['item-id']) {
+      return record;
+    }
+  };
 };
