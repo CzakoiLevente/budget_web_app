@@ -10,14 +10,14 @@
 
 <body class="body" id="body">
   <p>HTML: rebirth from ashes starting</p>
-  <p>
+  <div>
     <button id="insert" onclick="insertRow()">random purchase</button>
     <button id="delete" onclick="deleteRow()">delete row</button>
     <!-- 
       <button id="list" onclick="getList()">list entries</button>  
     -->
     <button id="modify" onclick="modifyRow()">modify</button>
-  </p>
+  </div>
 
   <div id="form">
     <div>
@@ -49,8 +49,8 @@
     <button onclick="submit_purchase()">"Submit purchase!"</button>
   </div>
 
-  <table id="table">
-    <th>
+  <table id="table"> 
+    <tbody id="table_body">this is the table body
       <tr>
         <td>ID</td>
         <td>Item</td>
@@ -64,8 +64,6 @@
           <input type="checkbox" id="main-check">
         </td>
       </tr>
-    </th>
-    <tbody id="table_body">
     </tbody>
   </table>
 

@@ -91,7 +91,8 @@ function deleteRow() {
 function modifyRow() {
   //window.alert("Jó játék, hogy nyomkodod??");
   console.log('modify button clicked');
-  
+  let x = document.getElementById("table").rows.item(1).innerHTML;
+  console.log(x);
   //return ;
 };
 
@@ -128,6 +129,7 @@ function getFormData() {
 
 function addToTable(arr) {
   tableBody.innerText = '';
+  console.log(tableBody);
   for (let i = 0; i < arr.length; i++) {
     let checkBox = document.createElement("input");
     let tableData = document.createElement("td");
