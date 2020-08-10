@@ -4,10 +4,9 @@
 
 const http = new XMLHttpRequest;
 
-let body;
 let tableBody;
 let buttonInsert;
-let buttonList;
+let butttonDelete;
 let formItem;
 let formQuantity;
 let formPrice;
@@ -21,10 +20,9 @@ let clickId;
 
 window.onload = () => {
 
-  body = document.getElementById('body');
   tableBody = document.getElementById('table_body');
   buttonInsert = document.getElementById('insert');
-  buttonList = document.getElementById('list');
+  butttonDelete = document.getElementById('delete');
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
   formQuantity = document.getElementById('formQuantity');
@@ -73,22 +71,17 @@ function getList() {
 function deleteRow() {
   let ids = getPurchaseData(getCheckes(checks));
   console.log(ids);
-  if (ids[0] === undefined) {
-    alert('Please select at least one row to delete');
-  } else {
-    if (window.confirm("Do you really want to delete selected entries?")) {
-      http.open('DELETE', '/delete');
-      http.setRequestHeader('Content-type', 'text/plain');
-      http.onload = () => {
-      };
-      http.send(JSON.stringify(ids));
-      getList();
+  if (window.confirm("Do you really want to delete selected entries?")) {
+    http.open('DELETE', '/delete');
+    http.setRequestHeader('Content-type', 'text/plain');
+    http.onload = () => {
     };
-  }
+    http.send(JSON.stringify(ids));
+    getList();
+  };
 };
 
 function modifyRow() {
-  console.log('modify button clicked');
   http.open('POST', '/update');
   http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
   http.onload = () => {
@@ -157,9 +150,16 @@ function addToTable(arr) {
     checkBox.setAttribute("class", "check");
     checkBox.setAttribute("type", `checkbox`);
     checkBox.setAttribute("id", `${arr[i]['item-id']}`);
+    checkBox.addEventListener('click', function () {
+      if (this.checked) {
+        butttonDelete.disabled = false;
+      } else {
+        butttonDelete.disabled = true;
+      }
+    });
     //tableRow.setAttribute("id", `${i + 1}`);
     tableRow.setAttribute("class", "table_row");
-    tableRow.setAttribute("id", `${arr[i]['item-id']}`);
+    //tableRow.setAttribute("id", arr[i]['item-id']);
     itemId.innerText = `${arr[i]['item-id']}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
@@ -168,6 +168,11 @@ function addToTable(arr) {
     tableCurrency.innerHTML = arr[i].currency;
     tablePayment.innerHTML = arr[i].payment_method;
     tableShop.innerHTML = arr[i].shop;
+
+    tableRow.addEventListener('click', function () {
+      fillForm(arr[i]);
+      clickId = arr[i]['item-id'];
+    });
   };
   checks = document.getElementsByClassName("check");
 };
@@ -227,17 +232,6 @@ function getPurchaseData(arr) {
   };
   return purchasesId;
 };
-
-document.addEventListener('click', function (e) {
-  e = e || window.event;
-  var target = e.target || e.srcElement,
-    text = target.textContent || target.innerText;
-  if (target.nodeName === 'TD') {
-    let rowId = parseInt(target.parentElement.id);
-    fillForm(getRowData(rowId));
-    clickId = rowId;
-  }
-}, false);
 
 function fillForm(obj) {
   formItem.value = obj.item;
