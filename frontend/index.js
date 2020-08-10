@@ -1,11 +1,9 @@
 'use strict';
 
-//const { raw } = require("body-parser");
-
 const http = new XMLHttpRequest;
 
 let tableBody;
-let buttonInsert;
+//let buttonInsert;
 let butttonDelete;
 let formItem;
 let formQuantity;
@@ -21,7 +19,7 @@ let clickId;
 window.onload = () => {
 
   tableBody = document.getElementById('table_body');
-  buttonInsert = document.getElementById('insert');
+  //buttonInsert = document.getElementById('insert');
   butttonDelete = document.getElementById('delete');
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
