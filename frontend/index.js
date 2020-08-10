@@ -3,7 +3,6 @@
 const http = new XMLHttpRequest;
 
 let tableBody;
-//let buttonInsert;
 let butttonDelete;
 let formItem;
 let formQuantity;
@@ -19,7 +18,6 @@ let clickId;
 window.onload = () => {
 
   tableBody = document.getElementById('table_body');
-  //buttonInsert = document.getElementById('insert');
   butttonDelete = document.getElementById('delete');
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
@@ -60,7 +58,6 @@ function getList() {
   http.onload = () => {
     let response = JSON.parse(http.responseText);
     databaseRecords = response;
-    //console.log(databaseRecords);
     addToTable(response);
   };
   http.send();
@@ -83,8 +80,6 @@ function modifyRow() {
   http.open('POST', '/update');
   http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
   http.onload = () => {
-    //let response = http.responseText;
-    //console.log('response');
   };
   let formData = getFormData();
   formData.id = clickId;
@@ -98,8 +93,6 @@ function submit_purchase() {
   http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
   //setting request header will tell server how to interpret (in this case: text or json)
   http.onload = () => {
-    //let response = http.responseText;
-    //console.log('response');
   };
   http.send(JSON.stringify(getFormData()));
   getList();
@@ -155,9 +148,7 @@ function addToTable(arr) {
         butttonDelete.disabled = true;
       }
     });
-    //tableRow.setAttribute("id", `${i + 1}`);
     tableRow.setAttribute("class", "table_row");
-    //tableRow.setAttribute("id", arr[i]['item-id']);
     itemId.innerText = `${arr[i]['item-id']}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
