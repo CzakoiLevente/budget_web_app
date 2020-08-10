@@ -13,9 +13,6 @@
   <div>
     <button id="insert" onclick="insertRow()">random purchase</button>
     <button id="delete" onclick="deleteRow()" disabled>delete row</button>
-    <!-- 
-      <button id="list" onclick="getList()">list entries</button>  
-    -->
     <button id="modify" onclick="modifyRow()">modify</button>
   </div>
 
@@ -61,7 +58,7 @@
         <td>Shop</td>
         <td>Timestamp</td>
         <td>
-          <input type="checkbox" id="main-check">
+          <input type="checkbox" id="main-check" onclick="mainCheckChange()">
         </td>
       </tr>
     </thead>

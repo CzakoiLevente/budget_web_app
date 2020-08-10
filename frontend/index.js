@@ -27,20 +27,21 @@ window.onload = () => {
   formShop = document.getElementById('formShop');
   mainCheck = document.getElementById('main-check');
 
-  mainCheck.addEventListener('change', function () {
-    if (this.checked) {
-      for (let i = 0; i < checks.length; i++) {
-        checks[i].checked = true;
-      };
-      mainCheck.checked = true;
-    } else {
-      for (let i = 0; i < checks.length; i++) {
-        checks[i].checked = false;
-      };
-      mainCheck.checked = false;
-    }
-  });
   getList();
+};
+
+function mainCheckChange() {
+  if (mainCheck.checked) {
+    for (let i = 0; i < checks.length; i++) {
+      checks[i].checked = true;
+    };
+    mainCheck.checked = true;
+  } else {
+    for (let i = 0; i < checks.length; i++) {
+      checks[i].checked = false;
+    };
+    mainCheck.checked = false;
+  }
 };
 
 
@@ -58,13 +59,14 @@ function getList() {
   http.onload = () => {
     let response = JSON.parse(http.responseText);
     databaseRecords = response;
+    console.log(databaseRecords);
     addToTable(response);
   };
   http.send();
 };
 
 function deleteRow() {
-  let ids = getPurchaseData(getCheckes(checks));
+  let ids = getSelectedItemIds(checks);
   console.log(ids);
   if (window.confirm("Do you really want to delete selected entries?")) {
     http.open('DELETE', '/delete');
@@ -113,6 +115,7 @@ function getFormData() {
 
 function addToTable(arr) {
   tableBody.innerText = '';
+  checks = [];
   for (let i = 0; i < arr.length; i++) {
     let checkBox = document.createElement("input");
     let tableData = document.createElement("td");
@@ -138,9 +141,9 @@ function addToTable(arr) {
     tableRow.appendChild(tableTimeStamp);
     tableRow.appendChild(tableData);
 
-    checkBox.setAttribute("class", "check");
     checkBox.setAttribute("type", `checkbox`);
-    checkBox.setAttribute("id", `${arr[i]['item-id']}`);
+    checkBox.dataset['itemId'] = arr[i]['item-id'];
+    // dataset -> will convert to camelCase in JS -> check: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
     checkBox.addEventListener('click', function () {
       if (this.checked) {
         butttonDelete.disabled = false;
@@ -148,7 +151,7 @@ function addToTable(arr) {
         butttonDelete.disabled = true;
       }
     });
-    tableRow.setAttribute("class", "table_row");
+    checks.push(checkBox);
     itemId.innerText = `${arr[i]['item-id']}`;
     tableItem.innerText = arr[i].item;
     tableQuantity.innerText = arr[i].quantity;
@@ -163,21 +166,20 @@ function addToTable(arr) {
       clickId = arr[i]['item-id'];
     });
   };
-  checks = document.getElementsByClassName("check");
 };
 
 function randomPurchase() {
   return {
-    item: rnStr(4).toLocaleLowerCase(),
-    quantity: rnNumber(2),
-    price: rnNumber(3),
-    currency: rnStr(3).toLocaleUpperCase(),
-    payment: rnPayment(),
-    shop: rnStr(4).toLocaleUpperCase()
+    item: randomString(4).toLocaleLowerCase(),
+    quantity: randomNumber(2),
+    price: randomNumber(3),
+    currency: randomString(3).toLocaleUpperCase(),
+    payment: randomPayment(),
+    shop: randomString(4).toLocaleUpperCase()
   };
 };
 
-function rnStr(num) {
+function randomString(num) {
   let result = '';
   let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let charactersLength = characters.length;
@@ -187,7 +189,7 @@ function rnStr(num) {
   return result;
 };
 
-function rnNumber(num) {
+function randomNumber(num) {
   let result = '';
   for (let i = 1; i < num + 1; i++) {
     result += Math.floor(Math.random() * num);
@@ -195,31 +197,19 @@ function rnNumber(num) {
   return parseInt(result + 1);
 };
 
-function rnPayment() {
+function randomPayment() {
   let payment = ['cash', 'card', 'tansfer', 'crypto', 'payment in sex'];
   return payment[Math.floor(Math.random() * 5)];
 };
 
-function getCheckes(checks) {
-  let checkedItems = [];
+function getSelectedItemIds(checks) {
+  let ids = [];
   for (let i = 0; i < checks.length; i++) {
     if (checks[i].checked === true) {
-      checkedItems.push(checks[i]);
+      ids.push(checks[i].dataset['itemId']);
     }
   };
-  return checkedItems;
-};
-
-function getPurchaseData(arr) {
-  let purchasesId = [];
-  for (let i = 0; i < arr.length; i++) {
-    for (let elem of databaseRecords) {
-      if (+arr[i].id === +elem['item-id']) {
-        purchasesId.push(elem['item-id']);
-      }
-    };
-  };
-  return purchasesId;
+  return ids;
 };
 
 function fillForm(obj) {
