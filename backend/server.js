@@ -65,13 +65,13 @@ app.post('/insert', (req, res) => {
       console.log(err);
       console.log('DB query failed');
       res.status(500).send();
-    } else {  
+    } else {
       res.status(200).send();
     }
   });
 });
 
-app.delete( '/delete', (req, res) => {
+app.delete('/delete', (req, res) => {
   let idArr = JSON.parse(req.body);
   for (let i = 0; i < idArr.length; i++) {
     database.query(`DELETE FROM test WHERE \`item-id\`='${idArr[i]}';`, (err, rows) => {
@@ -80,8 +80,19 @@ app.delete( '/delete', (req, res) => {
         res.status(500).send();
       } else {
         res.status(200).send();
-      }      
+      }
     });
   };
 });
 
+app.post('/update', (req, res) => {
+  database.query(`UPDATE test SET quantity='${req.body.quantity}', price='${req.body.price}', item='${req.body.item}', shop='${req.body.shop}', currency='${req.body.currency}', payment_method='${req.body.payment}' WHERE \`item-id\`='${req.body.id}';`, (err, row) => {
+    if (err) {
+      console.log(err);
+      console.log('DB query failed');
+      res.status(500).send();
+    } else {
+      res.status(200).send();
+    }
+  });
+});

@@ -17,6 +17,7 @@ let formShop;
 let mainCheck;
 let databaseRecords;
 let checks;
+let clickId;
 
 window.onload = () => {
 
@@ -91,7 +92,16 @@ function deleteRow() {
 function modifyRow() {
   //window.alert("Jó játék, hogy nyomkodod??");
   console.log('modify button clicked');
-  //return ;
+  http.open('POST', '/update');
+  http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
+  http.onload = () => {
+    //let response = http.responseText;
+    //console.log('response');
+  };
+  let formData = getFormData();
+  formData.id = clickId;
+  http.send(JSON.stringify(formData));
+  getList();
 };
 
 function submit_purchase() {
@@ -234,15 +244,16 @@ document.addEventListener('click', function (e) {
   if (target.nodeName === 'TD') {
     let rowId = parseInt(target.parentElement.id);
     fillForm(getRowData(rowId));
+    clickId = rowId;
   } 
 }, false);
 
 function fillForm(obj) {
   formItem.value = obj.item;
-  formQuantity.value = obj.quantity,
-    formPrice.value = obj.price;
+  formQuantity.value = obj.quantity;
+  formPrice.value = obj.price;
   formCurrency.value = obj.currency;
-  formPayment.value = obj.payment;
+  formPayment.value = obj.payment_method;
   formShop.value = obj.shop;
 };
 
