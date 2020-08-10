@@ -71,26 +71,23 @@ function getList() {
 };
 
 function deleteRow() {
-  http.open('DELETE', '/delete');
-  http.setRequestHeader('Content-type', 'text/plain');
-  http.onload = () => {
-  };
-
-  /*
-  if (window.confirm("Do you really want to leave?")) { 
-    //window.open( "exit.html", "Thanks for Visiting!");
-  }
-  */
-
   let ids = getPurchaseData(getCheckes(checks));
   console.log(ids);
-
-  http.send(JSON.stringify(ids));
-  getList();
+  if (ids[0] === undefined) {
+    alert('Please select at least one row to delete');
+  } else {
+    if (window.confirm("Do you really want to delete selected entries?")) {
+      http.open('DELETE', '/delete');
+      http.setRequestHeader('Content-type', 'text/plain');
+      http.onload = () => {
+      };
+      http.send(JSON.stringify(ids));
+      getList();
+    };
+  }
 };
 
 function modifyRow() {
-  //window.alert("Jó játék, hogy nyomkodod??");
   console.log('modify button clicked');
   http.open('POST', '/update');
   http.setRequestHeader('Content-type', 'application/json;charset=utf-8');
