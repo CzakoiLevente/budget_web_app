@@ -126,18 +126,12 @@ function getFormData() {
     payment: formPayment.value,
     shop: formShop.value
   };
-  //formCurrency.value = null;
-  //formPayment.value = null;
-  //formShop.value = null;
-  //formItem.value = null;
-  //formQuantity.value = null;
-  //formPrice.value = null;  
+  clearForm();
   return formData;
 };
 
 function addToTable(arr) {
   tableBody.innerText = '';
-  console.log(tableBody);
   for (let i = 0; i < arr.length; i++) {
     let checkBox = document.createElement("input");
     let tableData = document.createElement("td");
@@ -240,12 +234,12 @@ function getPurchaseData(arr) {
 document.addEventListener('click', function (e) {
   e = e || window.event;
   var target = e.target || e.srcElement,
-      text = target.textContent || target.innerText;
+    text = target.textContent || target.innerText;
   if (target.nodeName === 'TD') {
     let rowId = parseInt(target.parentElement.id);
     fillForm(getRowData(rowId));
     clickId = rowId;
-  } 
+  }
 }, false);
 
 function fillForm(obj) {
@@ -263,4 +257,13 @@ function getRowData(num) {
       return record;
     }
   };
+};
+
+function clearForm() {
+  formCurrency.value = null;
+  formPayment.value = null;
+  formShop.value = null;
+  formItem.value = null;
+  formQuantity.value = null;
+  formPrice.value = null;
 };
