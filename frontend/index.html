@@ -9,11 +9,11 @@
 </head>
 
 <body class="body" id="body">
-  <p>HTML: rebirth from ashes starting</p>
+  <p>BUDGET WEB APP</p>
   <div>
     <button id="insert" onclick="insertRow()">random purchase</button>
     <button id="delete" onclick="deleteRow()" disabled>delete row</button>
-    <button id="modify" onclick="modifyRow()">modify</button>
+    <button id="modify" onclick="modifyRow()" disabled>modify</button>
   </div>
 
   <div id="form">
@@ -21,33 +21,33 @@
     </div>
     <div id="form_row">
       <label for="item_name">Purchased item:</label>
-      <input type="text" name="name" id="formItem" required placeholder="Purchased item…">
+      <input type="text" oninput="activateSubmitButton()" id="formItem" required placeholder="Purchased item…">
     </div>
     <div id="form_row">
       <label for="item_quantity">Quantity:</label>
-      <input type="number" name="" id="formQuantity" required placeholder="Quantity...">
+      <input type="number" oninput="activateSubmitButton()" id="formQuantity" required placeholder="Quantity...">
     </div>
     <div id="form_row">
       <label for="item_price">Price:</label>
-      <input type="number" name="" id="formPrice" required placeholder="Price...">
+      <input type="number" oninput="activateSubmitButton()" id="formPrice" required placeholder="Price...">
     </div>
     <div id="form-row">
       <label for="item_currency">Currency</label>
-      <input type="text" id="formCurrency" required placeholder="Currency...">
+      <input type="text" oninput="activateSubmitButton()" id="formCurrency" required placeholder="Currency...">
     </div>
     <div id="form-row">
       <label for="item_payment">Payment</label>
-      <input type="text" id="formPayment" required placeholder="Payment form...">
+      <input type="text" oninput="activateSubmitButton()" id="formPayment" required placeholder="Payment form...">
     </div>
     <div id="form-row">
       <label for="item_shop">Shop</label>
-      <input type="text" id="formShop" required placeholder="Name of the shop...">
+      <input type="text" oninput="activateSubmitButton()" id="formShop" required placeholder="Name of the shop...">
     </div>
     <div>
       <label for="item_date">Date</label>
-      <input type="datetime-local" id="formDate" placeholder="Whats the date?..." >
+      <input type="datetime-local" oninput="activateSubmitButton()" id="formDate" placeholder="Whats the date?..." >
     </div>
-    <button onclick="submit_purchase()">"Submit purchase!"</button>
+    <button id="submit" onclick="submit_purchase()" disabled>Add new purchase!  </button>
   </div>
 
   <table id="table">

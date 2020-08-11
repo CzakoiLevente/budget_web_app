@@ -4,6 +4,8 @@ const http = new XMLHttpRequest;
 
 let tableBody;
 let butttonDelete;
+let butttonModify;
+let butttonSubmit;
 let formItem;
 let formQuantity;
 let formPrice;
@@ -20,6 +22,8 @@ window.onload = () => {
 
   tableBody = document.getElementById('table_body');
   butttonDelete = document.getElementById('delete');
+  butttonModify = document.getElementById('modify');
+  butttonSubmit = document.getElementById('submit');
   formItem = document.getElementById('formItem');
   formPrice = document.getElementById('formPrice');
   formQuantity = document.getElementById('formQuantity');
@@ -87,8 +91,18 @@ function modifyRow() {
   };
   let formData = getFormData();
   formData.id = clickId;
-  http.send(JSON.stringify(formData));
-  getList();
+  
+  for (let elem in formData) {
+    console.log('for loop start');
+    if (elem.value === undefined || elem.value === null) {
+      console.log('for loop break');
+      break;
+    } else {
+      console.log('for loop end');
+      http.send(JSON.stringify(formData));
+      getList();
+    }
+  };
 };
 
 function submit_purchase() {
@@ -170,9 +184,15 @@ function addToTable(arr) {
     tableRow.addEventListener('click', function () {
       fillForm(arr[i]);
       clickId = arr[i]['item-id'];
+      butttonModify.disabled = false;
+      activateSubmitButton();
     });
   };
 };
+
+function activateSubmitButton() {
+  butttonSubmit.disabled = false;
+}
 
 function getSelectedItemIds(checks) {
   let ids = [];
@@ -191,6 +211,7 @@ function fillForm(obj) {
   formCurrency.value = obj.currency;
   formPayment.value = obj.payment_method;
   formShop.value = obj.shop;
+  formDate.value = obj.date.slice(0, 19);
 };
 
 function getRowData(num) {
