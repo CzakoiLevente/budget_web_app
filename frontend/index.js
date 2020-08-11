@@ -10,6 +10,7 @@ let formPrice;
 let formCurrency;
 let formPayment;
 let formShop;
+let formDate;
 let mainCheck;
 let databaseRecords;
 let checks;
@@ -25,6 +26,7 @@ window.onload = () => {
   formCurrency = document.getElementById('formCurrency');
   formPayment = document.getElementById('formPayment');
   formShop = document.getElementById('formShop');
+  formDate = document.getElementById('formDate');
   mainCheck = document.getElementById('main-check');
 
   getList();
@@ -46,7 +48,7 @@ function mainCheckChange() {
 
 function insertRow() {
   http.open('POST', '/insert');
-  http.setRequestHeader("Content-type", "application/json");
+  http.setRequestHeader("Content-type", "application/json;charset=utf-8");
   http.onload = () => {
   };
   http.send(JSON.stringify(randomPurchase()));
@@ -56,10 +58,9 @@ function insertRow() {
 function getList() {
   http.open('GET', '/get');
   http.onload = () => {
-    let response = JSON.parse(http.responseText);
-    databaseRecords = response;
+    let databaseRecords = JSON.parse(http.responseText);
     console.log(databaseRecords);
-    addToTable(response);
+    addToTable(databaseRecords);
   };
   http.send();
 };
@@ -106,7 +107,8 @@ function getFormData() {
     price: formPrice.value,
     currency: formCurrency.value,
     payment: formPayment.value,
-    shop: formShop.value
+    shop: formShop.value,
+    date: formDate.value
   };
   clearForm();
   return formData;
@@ -127,6 +129,7 @@ function addToTable(arr) {
     let tableShop = document.createElement("td");
     let tablePayment = document.createElement("td");
     let tableCurrency = document.createElement("td");
+    let tableDate = document.createElement("td");
     let itemId = document.createElement("td");
 
     tableRow.appendChild(itemId);
@@ -137,6 +140,7 @@ function addToTable(arr) {
     tableRow.appendChild(tableCurrency);
     tableRow.appendChild(tablePayment);
     tableRow.appendChild(tableShop);
+    tableRow.appendChild(tableDate);
     tableRow.appendChild(tableTimeStamp);
     tableRow.appendChild(tableData);
 
@@ -148,6 +152,7 @@ function addToTable(arr) {
         butttonDelete.disabled = false;
       } else {
         butttonDelete.disabled = true;
+        clearForm();
       }
     });
     checks.push(checkBox);
@@ -156,9 +161,10 @@ function addToTable(arr) {
     tableQuantity.innerText = arr[i].quantity;
     tablePrice.innerText = arr[i].price;
     tableTimeStamp.innerText = arr[i].timestamp.replace('T', ' ').slice(0, 19);
-    tableCurrency.innerHTML = arr[i].currency;
-    tablePayment.innerHTML = arr[i].payment_method;
-    tableShop.innerHTML = arr[i].shop;
+    tableCurrency.innerText = arr[i].currency;
+    tablePayment.innerText = arr[i].payment_method;
+    tableShop.innerText = arr[i].shop;
+    tableDate.innerText = arr[i].date.replace('T', ' ').slice(0, 19);//.replace('T', ' ').slice(0, 19);
 
     tableRow.addEventListener('click', function () {
       fillForm(arr[i]);

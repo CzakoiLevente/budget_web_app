@@ -5,13 +5,14 @@ function randomPurchase() {
     price: randomNumber(3),
     currency: randomString(3).toLocaleUpperCase(),
     payment: randomPayment(),
-    shop: randomString(4).toLocaleUpperCase()
+    shop: randomString(4).toLocaleUpperCase(),
+    date: randomDate(100,2,20)
   };
 };
 
 function randomString(num) {
   let result = '';
-  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzéáíóúöőüű0123456789';
   let charactersLength = characters.length;
   for (let i = 0; i < num; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -31,3 +32,12 @@ function randomPayment() {
   let payment = ['cash', 'card', 'tansfer', 'crypto', 'payment in sex'];
   return payment[Math.floor(Math.random() * 5)];
 };
+
+function randomDate(rangeOfDays, startHour, hourRange) {
+  let today = new Date(Date.now());
+  let resultDate = new Date(today.getYear() + 1900, today.getMonth(), today.getDate() + Math.random() * rangeOfDays, Math.random() * hourRange + startHour, Math.random() * 60);
+  console.log(JSON.stringify(resultDate).replace('T', ' ').slice(1, 20));
+  return JSON.stringify(resultDate).replace('T', ' ').slice(1, 20);
+};
+
+randomDate(200,2,12);

@@ -60,7 +60,7 @@ app.get('/get', (req, res) => {
 });
 
 app.post('/insert', (req, res) => {
-  database.query(`INSERT INTO test (quantity, price, item, shop, currency, payment_method) VALUES ('${req.body.quantity}', '${req.body.price}', '${req.body.item}', '${req.body.shop}', '${req.body.currency}', '${req.body.payment}');`, (err, row) => {
+  database.query(`INSERT INTO test (quantity, price, item, shop, currency, payment_method, date) VALUES ('${req.body.quantity}', '${req.body.price}', '${req.body.item}', '${req.body.shop}', '${req.body.currency}', '${req.body.payment}', '${req.body.date}');`, (err, row) => {
     if (err) {
       console.log(err);
       console.log('DB query failed');
