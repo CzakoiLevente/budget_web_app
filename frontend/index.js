@@ -38,11 +38,13 @@ function mainCheckChange() {
       checks[i].checked = true;
     };
     mainCheck.checked = true;
+    butttonDelete.disabled = false;
   } else {
     for (let i = 0; i < checks.length; i++) {
       checks[i].checked = false;
     };
     mainCheck.checked = false;
+    butttonDelete.disabled = true;
   }
 };
 
@@ -152,7 +154,6 @@ function addToTable(arr) {
         butttonDelete.disabled = false;
       } else {
         butttonDelete.disabled = true;
-        clearForm();
       }
     });
     checks.push(checkBox);
