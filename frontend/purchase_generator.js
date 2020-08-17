@@ -36,8 +36,5 @@ function randomPayment() {
 function randomDate(rangeOfDays, startHour, hourRange) {
   let today = new Date(Date.now());
   let resultDate = new Date(today.getYear() + 1900, today.getMonth(), today.getDate() + Math.random() * rangeOfDays, Math.random() * hourRange + startHour, Math.random() * 60);
-  console.log(JSON.stringify(resultDate).replace('T', ' ').slice(1, 20));
   return JSON.stringify(resultDate).replace('T', ' ').slice(1, 20);
 };
-
-randomDate(200,2,12);

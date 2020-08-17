@@ -6,72 +6,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phoenix</title>
   <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body class="body" id="body">
-  <p>BUDGET WEB APP</p>
-  <div>
-    <button id="insert" onclick="insertRow()">random purchase</button>
-    <button id="delete" onclick="deleteRow()" disabled>delete row</button>
-    <button id="modify" onclick="modifyRow()" disabled>modify</button>
+  <div class="page-header">
+    <h1>BUDGET WEB APP</h1>
   </div>
+  
+  <form action="/action_page.php" id="form">
+    <div id="form_row" class="form-group">
+      <label class="text-dark" for="item_name">Purchased item:</label>
+      <input class="form-control" type="text" oninput="activateSubmitButton()" id="formItem" required
+      placeholder="Purchased item…">
+    </div>
+    <div id="form_row" class="form-group">
+      <label class="text-dark" for="item_quantity">Quantity:</label>
+      <input class="form-control" type="number" oninput="activateSubmitButton()" id="formQuantity" required
+        placeholder="Quantity...">
+      </div>
+      <div id="form_row" class="form-group" class="form-group">
+        <label class="text-dark" for="item_price">Price:</label>
+        <input class="form-control" type="number" oninput="activateSubmitButton()" id="formPrice" required
+        placeholder="Price...">
+      </div>
+      <div id="form-row" class="form-group">
+      <label class="text-dark" for="item_currency">Currency</label>
+      <input class="form-control" type="text" oninput="activateSubmitButton()" id="formCurrency" required
+      placeholder="Currency...">
+    </div>
+    <div id="form-row" class="form-group">
+      <label class="text-dark" for="item_payment">Payment</label>
+      <input class="form-control" type="text" oninput="activateSubmitButton()" id="formPayment" required
+      placeholder="Payment form...">
+    </div>
+    <div id="form-row" class="form-group">
+      <label class="text-dark" for="item_shop">Shop</label>
+      <input class="form-control" type="text" oninput="activateSubmitButton()" id="formShop" required
+      placeholder="Name of the shop...">
+    </div>
+    <div id="form-row" class="form-group">
+      <label class="text-dark" for="item_date">Date</label>
+      <input class="form-control" type="datetime-local" oninput="activateSubmitButton()" id="formDate"
+      placeholder="Whats the date?...">
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary btn-sm" id="insert" onclick="insertRow()">random purchase</button>
+      <button class="btn btn-primary btn-sm" id="delete" onclick="deleteRow()" disabled>delete row</button>
+      <button class="btn btn-primary btn-sm" id="modify" onclick="modifyRow()" disabled>modify</button>
+      <button class="btn btn-primary btn-sm" id="submit" onclick="submit_purchase()" disabled>Add new purchase!</button>
+    </div>
+  </form>
+  
 
-  <div id="form">
-    <div>
-    </div>
-    <div id="form_row">
-      <label for="item_name">Purchased item:</label>
-      <input type="text" oninput="activateSubmitButton()" id="formItem" required placeholder="Purchased item…">
-    </div>
-    <div id="form_row">
-      <label for="item_quantity">Quantity:</label>
-      <input type="number" oninput="activateSubmitButton()" id="formQuantity" required placeholder="Quantity...">
-    </div>
-    <div id="form_row">
-      <label for="item_price">Price:</label>
-      <input type="number" oninput="activateSubmitButton()" id="formPrice" required placeholder="Price...">
-    </div>
-    <div id="form-row">
-      <label for="item_currency">Currency</label>
-      <input type="text" oninput="activateSubmitButton()" id="formCurrency" required placeholder="Currency...">
-    </div>
-    <div id="form-row">
-      <label for="item_payment">Payment</label>
-      <input type="text" oninput="activateSubmitButton()" id="formPayment" required placeholder="Payment form...">
-    </div>
-    <div id="form-row">
-      <label for="item_shop">Shop</label>
-      <input type="text" oninput="activateSubmitButton()" id="formShop" required placeholder="Name of the shop...">
-    </div>
-    <div>
-      <label for="item_date">Date</label>
-      <input type="datetime-local" oninput="activateSubmitButton()" id="formDate" placeholder="Whats the date?..." >
-    </div>
-    <button id="submit" onclick="submit_purchase()" disabled>Add new purchase!  </button>
+  <div class="container container-sm">
+    <table id="table" class="table table-striped">
+      <thead>
+        <tr class="text-dark">
+          <td>ID</td>
+          <td>Item</td>
+          <td>Quantity</td>
+          <td>Price</td>
+          <td>Currency</td>
+          <td>Payment</td>
+          <td>Shop</td>
+          <td>Date</td>
+          <td>Timestamp</td>
+          <td>
+            <input type="checkbox" id="main-check" onclick="mainCheckChange()">
+          </td>
+        </tr>
+      </thead>
+      <tbody id="table_body">
+      </tbody>
+    </table>
   </div>
-
-  <table id="table">
-    <thead>
-      <tr>
-        <td>ID</td>
-        <td>Item</td>
-        <td>Quantity</td>
-        <td>Price</td>
-        <td>Currency</td>
-        <td>Payment</td>
-        <td>Shop</td>
-        <td>Date</td>
-        <td>Timestamp</td>
-        <td>
-          <input type="checkbox" id="main-check" onclick="mainCheckChange()">
-        </td>
-      </tr>
-    </thead>
-    <tbody id="table_body">
-    </tbody>
-  </table>
 
   <script src="index.js"></script>
   <script src="purchase_generator.js"></script>
 </body>
+
 </html>

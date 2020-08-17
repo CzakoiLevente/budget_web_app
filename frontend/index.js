@@ -65,7 +65,6 @@ function getList() {
   http.open('GET', '/get');
   http.onload = () => {
     let databaseRecords = JSON.parse(http.responseText);
-    console.log(databaseRecords);
     addToTable(databaseRecords);
   };
   http.send();
@@ -91,18 +90,9 @@ function modifyRow() {
   };
   let formData = getFormData();
   formData.id = clickId;
-  
-  for (let elem in formData) {
-    console.log('for loop start');
-    if (elem.value === undefined || elem.value === null) {
-      console.log('for loop break');
-      break;
-    } else {
-      console.log('for loop end');
-      http.send(JSON.stringify(formData));
-      getList();
-    }
-  };
+
+  http.send(JSON.stringify(formData));
+  getList();
 };
 
 function submit_purchase() {

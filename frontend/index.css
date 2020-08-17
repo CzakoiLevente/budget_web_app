@@ -1,18 +1,13 @@
 body {
-  min-width: 400px;
-  min-height: 80vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
-}
-
-#form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 }
 
 tr:hover{
   background:rgb(218, 213, 213);
+}
+
+form {
+  margin: 10px;
 }
