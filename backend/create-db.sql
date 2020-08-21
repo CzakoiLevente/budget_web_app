@@ -14,6 +14,15 @@ CREATE TABLE IF NOT EXISTS `test` (
   `date` DATE NOT NULL
 );
 
+INSERT INTO test (quantity, price, item, shop, payment_method, currency) 
+VALUES (1,1,'apple', 'LIDL', 'cash' , '€'),
+(3,100000,'tesla model S', 'TESLA Zürich', 'transfer' , '€'),
+(2,20,'pear', 'market', 'cash' , 'Ft'),
+(3,5,'gas', 'SHELL', 'crypto transfer' , 'BTC'),
+(10,1.5,'bucket', 'PRAKTIKER', 'cash' , 'ECU'),
+(1,10000,'mobile phone', 't-mobile', 'card' , 'CZSK'),
+(2,43.65,'telephone bill', 'VODAFONE', 'other' , '€');
+
 /*
 INSERT INTO test (quantity, price, item) VALUES (1,1,'asd');
 
