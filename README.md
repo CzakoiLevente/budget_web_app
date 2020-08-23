@@ -4,7 +4,7 @@ This project's aim is to collect, store and visualize data from expenses. Simple
 
 <br>
 
-## basic use case
+### basic use case
 
 Buy various things in a store and make a photo of the receipt. 
 The app will be able to read it, then create a list of purchased items with all the data, and send to database.
@@ -12,7 +12,7 @@ The UI will visualize various statistics.
 
 <br>
 
-## operation: (manual insertion only for now)
+### operation: (manual insertion only for now)
   - [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) (manual input also possible): photo -> preview for edit (CRUD) -> Save DATA
   - DATA: json -> server -> validation -> send DB
   - visualization: [D3](https://d3js.org/) / [C3](https://c3js.org/)
