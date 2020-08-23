@@ -169,7 +169,7 @@ function addToTable(arr) {
     tableCurrency.innerText = arr[i].currency;
     tablePayment.innerText = arr[i].payment_method;
     tableShop.innerText = arr[i].shop;
-    tableDate.innerText = arr[i].date;//.replace('T', ' ').slice(0, 19);
+    tableDate.innerText = arr[i].date.replace('T', ' ').slice(0, 19);
 
     tableRow.addEventListener('click', function () {
       fillForm(arr[i]);
@@ -201,7 +201,7 @@ function fillForm(obj) {
   formCurrency.value = obj.currency;
   formPayment.value = obj.payment_method;
   formShop.value = obj.shop;
-  formDate.value = obj.date//.slice(0, 19);
+  formDate.value = obj.date.slice(0, 19);
 };
 
 function getRowData(num) {
