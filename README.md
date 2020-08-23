@@ -50,25 +50,29 @@ additional tools will be used in the project:
 ## install guide for Linux
 `TT = type in terminal`
 
-0) create a testing folder, then right click, and open it in terminal
+[0] create a testing folder, then right click, and open it in terminal
 
-1)  to initialize project TT:
+[1]  to initialize project TT:
 
 `$ git init`
 
-2) to download the repository, TT:
+[2] to download the repository, TT:
 
 `$ git clone https://github.com/CzakoiLevente/budget_web_app` 
+  
+[3] go to the project folder, TT:
+  
+`$ cd budget_web_app`
 
-3) to install all dependecies, TT:
+[4] to install all dependecies, TT:
 
 `$ npm install`
 
-4) to create DB with mysql default root password, TT then enter password:"password" 
+[5] to create DB with mysql default root password, TT then enter password:"password" 
 
 `$ mysql -u root -p < backend/create-db.sql`
 
-5) create .env file and copy/paste/ctrl+s:
+[6] create .env file and copy/paste/ctrl+s:
 ```javascript
 DB_HOST=localhost
 DB_USER=root
@@ -76,10 +80,10 @@ DB_PASS=password
 DB_NAME=test_project
 ```
 
-6) to run the project, TT:
+[7] to run the project, TT:
 
 `$ node backend/server.js`
 
-7) to use app, click link:
+[8] to use app, click link:
 
 http://localhost:20000/
