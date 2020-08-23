@@ -12,7 +12,7 @@ The UI will visualize various statistics.
 
 <br>
 
-## operation: (manual insertion onléy for now)
+## operation: (manual insertion only for now)
   - [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) (manual input also possible): photo -> preview for edit (CRUD) -> Save DATA
   - DATA: json -> server -> validation -> send DB
   - visualization: [D3](https://d3js.org/) / [C3](https://c3js.org/)
