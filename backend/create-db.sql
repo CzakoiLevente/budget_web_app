@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `shop` VARCHAR (30) NOT NULL,
   `payment_method` VARCHAR (30) NOT NULL,
   `currency` VARCHAR (5) NOT NULL,
-  `date` DATE NOT NULL
+  `date` DATE NULL
 );
 
 INSERT INTO test (quantity, price, item, shop, payment_method, currency) 
