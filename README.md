@@ -87,3 +87,9 @@ DB_NAME=test_project
 [8] to use app, click link:
 
 http://localhost:20000/
+
+<br>
+
+### uninstall
+
+ Simply delete the project folder you created in step [0].
