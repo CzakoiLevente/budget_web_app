@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM mhart/alpine-node:14
 
 WORKDIR /usr/bin/budget-app/
 
@@ -6,13 +6,13 @@ COPY . .
 
 RUN apk update \ 
     && apk add git \
+    && apk add nodejs \
     && git init https://github.com/CzakoiLevente/budget_web_app \
-    && apk add npm \
     && npm install -y \
     && sh docker-setup.sh
 
-
+EXPOSE 3306:20000
 
 VOLUME /var/budget-app-vol/
 
-RUN node backend/server.js
+CMD ["node", "backend/server.js"]
