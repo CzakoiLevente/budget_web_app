@@ -97,7 +97,7 @@ http://localhost:20000/
 
 ### uninstall
 
-**0.** &nbsp; stop project from running: `CTRL-C`
+**0.** &nbsp; stop project from running, go back to terminal: `CTRL-C`
 
 **1.** &nbsp; remove project folder:
  
