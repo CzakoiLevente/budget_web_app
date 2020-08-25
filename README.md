@@ -50,7 +50,7 @@ additional tools will be used in the project:
 ## install guide for Linux
 `TT = type in terminal`
 
-**PREREQUISITE: mysql needs to be installed.**
+**PREREQUISITE: [git](https://git-scm.com/downloads), [mysql](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html), [node](https://nodejs.org/en/download/package-manager/) needs to be installed.**
 
 <br>
 
