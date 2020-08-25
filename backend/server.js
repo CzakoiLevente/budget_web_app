@@ -32,7 +32,7 @@ const database = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 });
-
+/*
 database.connect((err) => {
   if (err) {
     console.log('DB connection is messed up!');
@@ -41,7 +41,7 @@ database.connect((err) => {
     console.log('Kiss me, DB is ready!');
   }
 });
-
+*/
 app.get('/', (req, res) => {
   //res.sendFile(path.join(__dirname + '/'));  -> __dirname is setting root folder
   res.sendFile('index.html');

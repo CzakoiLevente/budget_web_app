@@ -1,18 +1,12 @@
-FROM mhart/alpine-node:14
+FROM node:14-slim
 
-WORKDIR /usr/bin/budget-app/
+WORKDIR /app
 
-COPY . .
+COPY . /app
 
-RUN apk update \ 
-    && apk add git \
-    && apk add nodejs \
-    && git init https://github.com/CzakoiLevente/budget_web_app \
-    && npm install -y \
-    && sh docker-setup.sh
-
-EXPOSE 3306:20000
-
-VOLUME /var/budget-app-vol/
+RUN npm install
 
 CMD ["node", "backend/server.js"]
+
+#docker build -t phoenix .
+#docker run -it -p 20000:20000 phoenix
