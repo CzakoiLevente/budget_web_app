@@ -68,10 +68,10 @@ $ cd budget_web_app
 $ npm install
 ```
 
-[4] to create DB with mysql default root password, TT then enter password:"password" 
+[4] to create DB with mysql default root password, TT: 
 
 ```javascript
-$ mysql -u root -p < backend/create-db.sql
+$ mysql -u root -p"password" < backend/create-db.sql
 ```
 
 [5] create .env file with variables for mysql:
