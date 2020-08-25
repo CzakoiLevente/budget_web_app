@@ -99,9 +99,8 @@ http://localhost:20000/
 
 **0.** &nbsp; stop project from running: `CTRL-C`
 
-**1.** &nbsp; remove project
- Simply delete the project folder you created in step.
-
+**1.** &nbsp; remove project folder:
+ 
 ```javascript
 $ cd ..
 ```
