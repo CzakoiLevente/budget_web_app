@@ -50,7 +50,7 @@ additional tools will be used in the project:
 ## install guide for Linux
 `TT = type in terminal`
 
-PREREQUISITE: mysql needs to be intalled.
+PREREQUISITE: mysql needs to be installed.
 
 **1** to download the repository, TT:
 
