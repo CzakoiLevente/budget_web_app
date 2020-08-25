@@ -50,44 +50,46 @@ additional tools will be used in the project:
 ## install guide for Linux
 `TT = type in terminal`
 
-PREREQUISITE: mysql needs to be installed.
+**PREREQUISITE: mysql needs to be installed.**
 
-**1** to download the repository, TT:
+<br>
+
+**1.** &nbsp; to download the repository, TT:
 
 ```javascript
 $ git clone https://github.com/CzakoiLevente/budget_web_app
 ``` 
   
-**2** go to the project folder, TT:
+**2.** &nbsp; go to the project folder, TT:
 
 ```javascript
 $ cd budget_web_app
 ```
 
-**3** to install all dependecies, TT:
+**3.** &nbsp; to install all dependecies, TT:
 
 ```javascript
 $ npm install
 ```
 
-**4** to create DB with mysql default root password, TT: 
+**4.** &nbsp; to create DB with mysql default root password, TT: 
 
 ```javascript
 $ mysql -u root -p"password" < backend/create-db.sql
 ```
 
-**5** create .env file with variables for mysql:
+**5.** &nbsp; create .env file with variables for mysql:
 ```javascript
  echo -e "DB_HOST=localhost\nDB_USER=root\nDB_PASS=password\nDB_NAME=test_project" >> .env 
 ```
 
-**6** to run the project, TT:
+**6.** &nbsp; to run the project, TT:
 
 ```javascript
 $ node backend/server.js
 ```
 
-**7** to use app, go to link:
+**7.** &nbsp; to use app, go to link:
 
 http://localhost:20000/
 
@@ -95,9 +97,9 @@ http://localhost:20000/
 
 ### uninstall
 
-**0** stop project from running: `CTRL-C`
+**0.** &nbsp; stop project from running: `CTRL-C`
 
-**1** remove project
+**1.** &nbsp; remove project
  Simply delete the project folder you created in step.
 
 ```javascript
@@ -108,7 +110,7 @@ then
 $ rm -rf budget_web_app
 ```
 
-**2** remove database:
+**2.** &nbsp; remove database:
 
 log into mysql as root:
 ```javascript
