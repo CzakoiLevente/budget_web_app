@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `timestamp` TIMESTAMP,
   `shop` VARCHAR (30) NOT NULL,
   `payment_method` VARCHAR (30) NOT NULL,
-  `currency` VARCHAR (5) NOT NULL,
+  `currency` VARCHAR (10) CHARACTER SET utf8 NOT NULL,
   `date` DATETIME NOT NULL
 );
 
