@@ -17,7 +17,7 @@ let mainCheck;
 let databaseRecords;
 let checks;
 let clickId;
-
+//event.preventDefault()
 window.onload = () => {
 
   tableBody = document.getElementById('table_body');
@@ -53,6 +53,7 @@ function mainCheckChange() {
 };
 
 function insertRow() {
+  event.preventDefault();
   http.open('POST', '/insert');
   http.setRequestHeader("Content-type", "application/json;charset=utf-8");
   http.onload = () => {
@@ -72,8 +73,8 @@ function getList() {
 
 function deleteRow() {
   let ids = getSelectedItemIds(checks);
-  console.log(ids);
   if (window.confirm("Do you really want to delete selected entries?")) {
+    event.preventDefault();
     http.open('DELETE', '/delete');
     http.setRequestHeader('Content-type', 'text/plain');
     http.onload = () => {
