@@ -109,7 +109,7 @@ http://localhost:20000/
 **1.** &nbsp; remove project folder:
  
 ```javascript
-$ cd ..
+$ cd ../..
 ```
 then
 ```javascript
