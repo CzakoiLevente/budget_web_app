@@ -54,7 +54,7 @@ The UI will visualize various statistics.
 
 ----
 
-## install guide for Linux
+## Install guide for Linux
 
 **PREREQUISITE: [git](https://git-scm.com/downloads), [mysql](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html), [node](https://nodejs.org/en/download/package-manager/) needs to be installed.**
 
