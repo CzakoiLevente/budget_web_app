@@ -4,6 +4,8 @@ This project's aim is to collect, store and visualize data from expenses. Simple
 
 <br>
 
+## Preview of version 1.0 
+
 ### basic use case
 
 Buy various things in a store and make a photo of the receipt. 
@@ -19,7 +21,7 @@ The UI will visualize various statistics.
   
 <br>
 
-## components
+### components
 
   - DB: mysql
   - backend: nodeJS express server
@@ -27,11 +29,14 @@ The UI will visualize various statistics.
       - HTML5
       - css / [bootsrap 4](https://www.w3schools.com/bootstrap4/default.asp) / theme: [greyson](https://bootstrap.themes.guide/greyson/)
       - JS
-  
-additional tools will be used in the project:
 
-  - docker
-  - jenkins
+<br>
+
+### additional tools will be used in the project:
+
+  - **docker** I removed the files from this repo, and will create an artifactory for it, 
+  meanwhile you can checkout in [this repository](https://github.com/CzakoiLevente/budget_web_app-phoenix).
+  - **jenkins** 
   
 <br>
 
@@ -44,8 +49,10 @@ additional tools will be used in the project:
   - validation
   - tests  
   - implement as mobile application
-  
+
 <br>
+
+----
 
 ## install guide for Linux
 `TT = type in terminal`
