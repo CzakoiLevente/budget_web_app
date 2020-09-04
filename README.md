@@ -34,7 +34,7 @@ The UI will visualize various statistics.
 
 ### additional tools will be used in the project:
 
-  - **docker** I removed the files from this repo, and will create an artifactory for it, 
+  - **docker** &nbsp; I removed the files from this repo, and will create an artifactory for it, 
   meanwhile you can checkout in [this repository](https://github.com/CzakoiLevente/budget_web_app-phoenix).
   - **jenkins** 
   
@@ -55,9 +55,10 @@ The UI will visualize various statistics.
 ----
 
 ## install guide for Linux
-`TT = type in terminal`
 
 **PREREQUISITE: [git](https://git-scm.com/downloads), [mysql](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html), [node](https://nodejs.org/en/download/package-manager/) needs to be installed.**
+
+`TT = type in terminal`
 
 <br>
 
