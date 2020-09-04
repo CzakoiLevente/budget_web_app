@@ -70,7 +70,7 @@ $ git clone https://github.com/CzakoiLevente/budget_web_app
 **2.** &nbsp; go to the project folder, TT:
 
 ```javascript
-$ cd budget_web_app
+$ cd budget_web_app/backend
 ```
 
 **3.** &nbsp; to install all dependecies, TT:
@@ -82,7 +82,7 @@ $ npm install
 **4.** &nbsp; to create DB with mysql default root password, TT: 
 
 ```javascript
-$ mysql -u root -p"password" < backend/create-db.sql
+$ mysql -u root -p"password" < create-db.sql
 ```
 
 **5.** &nbsp; create .env file with variables for mysql:
@@ -93,7 +93,7 @@ $ mysql -u root -p"password" < backend/create-db.sql
 **6.** &nbsp; to run the project, TT:
 
 ```javascript
-$ node backend/server.js
+$ node server.js
 ```
 
 **7.** &nbsp; to use app, go to link:
